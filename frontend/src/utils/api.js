@@ -12,13 +12,16 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
+// Add a response interceptor for debugging Network Errors
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.message === 'Network Error') {
-            const attemptedUrl = error.config ? error.config.baseURL : 'Unknown';
-            alert(`Network Error: The frontend could not connect to the backend.\n\nIt tried to connect to:\n${attemptedUrl}\n\nPlease check if your backend is deployed correctly and running.`);
-        }
+        const attemptedUrl = error.config ? error.config.baseURL : 'Unknown';
+        const errorMsg = error.message;
+        const errorStatus = error.response ? error.response.status : 'No Status';
+        
+        alert(`[DEBUG] Login Failed!\n\nMessage: ${errorMsg}\nStatus: ${errorStatus}\nURL Tried: ${attemptedUrl}`);
+
         if (error.response && error.response.status === 401) {
             localStorage.clear();
             window.location.href = '/login';
