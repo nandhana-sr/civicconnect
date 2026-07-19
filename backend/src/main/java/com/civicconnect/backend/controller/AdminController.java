@@ -82,6 +82,23 @@ public class AdminController {
         return ResponseEntity.badRequest().body("Invalid status");
     }
 
+    @PostMapping("/users/{id}/warn")
+    public ResponseEntity<?> warnUser(@PathVariable Long id, @RequestBody Map<String, String> body) {
+        User user = userRepository.findById(id).orElseThrow();
+        String message = body.get("message");
+        if (message == null || message.trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("Message is required");
+        }
+
+        Notification notif = new Notification();
+        notif.setUser(user);
+        notif.setType("ADMIN_WARNING");
+        notif.setMessage("WARNING FROM ADMIN: " + message);
+        notificationRepository.save(notif);
+
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/reports")
     public ResponseEntity<List<ReportedPost>> getAllReportedPosts() {
         return ResponseEntity.ok(reportedPostRepository.findAll());

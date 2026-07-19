@@ -34,9 +34,13 @@ const AdminUsers = () => {
     const warnUser = async (userId) => {
         const message = prompt("Enter warning message:");
         if (message) {
-            // Usually this would go to a specific /admin/users/{id}/warn endpoint
-            // For now we can use broadcast or a direct notification if we had a direct API.
-            alert("Warning sent! (Feature to be fully connected)");
+            try {
+                await api.post(`/admin/users/${userId}/warn`, { message });
+                alert("Warning successfully sent to the user's notification box!");
+            } catch (error) {
+                console.error("Failed to send warning", error);
+                alert("Failed to send warning.");
+            }
         }
     }
 
