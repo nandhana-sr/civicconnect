@@ -82,6 +82,10 @@ public class IssueController {
             }
         }
 
+        // Award points
+        user.setTotalCredits(user.getTotalCredits() + 10);
+        userRepository.save(user);
+
         return ResponseEntity.ok(issue);
     }
 
@@ -121,6 +125,16 @@ public class IssueController {
                 notif.setMessage("Your issue '" + issue.getTitle() + "' status has been updated to " + statusEnum.name() + ".");
                 notificationRepository.save(notif);
                 
+                // Update author's score based on new status
+                User author = issue.getReporter();
+                if (statusEnum == IssueStatus.RESOLVED) {
+                    author.setImpactScore(author.getImpactScore() + 50);
+                    userRepository.save(author);
+                } else if (statusEnum == IssueStatus.REJECTED) {
+                    author.setTrustScore(author.getTrustScore() - 5);
+                    userRepository.save(author);
+                }
+                
             } catch (IllegalArgumentException e) {
                 return ResponseEntity.badRequest().body("Invalid status.");
             }
@@ -158,6 +172,11 @@ public class IssueController {
         report.setReportedBy(user);
         report.setReason(reason);
         reportedPostRepository.save(report);
+        
+        // Deduct trust score
+        User author = issue.getReporter();
+        author.setTrustScore(author.getTrustScore() - 2);
+        userRepository.save(author);
         
         return ResponseEntity.ok("Issue reported successfully");
     }

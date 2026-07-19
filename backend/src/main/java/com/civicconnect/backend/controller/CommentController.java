@@ -37,6 +37,9 @@ public class CommentController {
         issue.setCommentsCount(issue.getCommentsCount() + 1);
         issueRepository.save(issue);
         
+        user.setTotalCredits(user.getTotalCredits() + 2);
+        userRepository.save(user);
+
         return ResponseEntity.ok(comment);
     }
 }

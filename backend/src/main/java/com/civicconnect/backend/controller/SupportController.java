@@ -35,6 +35,17 @@ public class SupportController {
             supportRepository.delete(existingSupport.get());
             issue.setSupportsCount(issue.getSupportsCount() - 1);
             issueRepository.save(issue);
+
+            // Revert Points
+            user.setTotalCredits(user.getTotalCredits() - 1);
+            userRepository.save(user);
+
+            if (!user.getId().equals(issue.getReporter().getId())) {
+                User author = issue.getReporter();
+                author.setTrustScore(author.getTrustScore() - 2);
+                userRepository.save(author);
+            }
+
             return ResponseEntity.ok("Support removed");
         } else {
             Support support = new Support();
@@ -44,6 +55,17 @@ public class SupportController {
             
             issue.setSupportsCount(issue.getSupportsCount() + 1);
             issueRepository.save(issue);
+
+            // Award Points
+            user.setTotalCredits(user.getTotalCredits() + 1);
+            userRepository.save(user);
+
+            if (!user.getId().equals(issue.getReporter().getId())) {
+                User author = issue.getReporter();
+                author.setTrustScore(author.getTrustScore() + 2);
+                userRepository.save(author);
+            }
+
             return ResponseEntity.ok("Support added");
         }
     }
