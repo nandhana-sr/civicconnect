@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+export const API_BASE_URL = import.meta.env.VITE_API_URL 
+    ? import.meta.env.VITE_API_URL.replace(/\/api$/, '') 
+    : 'http://localhost:8080';
+
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080/api',
+    timeout: 60000,
 });
 
 api.interceptors.request.use((config) => {
@@ -12,16 +17,10 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
-// Add a response interceptor for debugging Network Errors
+// Add a response interceptor for auth errors
 api.interceptors.response.use(
     (response) => response,
     (error) => {
-        const attemptedUrl = error.config ? error.config.baseURL : 'Unknown';
-        const errorMsg = error.message;
-        const errorStatus = error.response ? error.response.status : 'No Status';
-        
-        alert(`[DEBUG] Login Failed!\n\nMessage: ${errorMsg}\nStatus: ${errorStatus}\nURL Tried: ${attemptedUrl}`);
-
         if (error.response && error.response.status === 401) {
             localStorage.clear();
             window.location.href = '/login';

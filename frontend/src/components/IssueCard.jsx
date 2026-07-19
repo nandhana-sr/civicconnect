@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import api from '../utils/api';
+import api, { API_BASE_URL } from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import { MapPin, MessageSquare, Heart, AlertTriangle, Send } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -103,7 +103,7 @@ const IssueCard = ({ issue: initialIssue }) => {
             
             <p className="text-gray-700 mb-4">{issue.detailedDescription || issue.shortDescription}</p>
             {issue.images && issue.images.length > 0 && (
-                <img src={`http://localhost:8080${issue.images[0]}`} alt="Issue" className="w-full h-64 object-cover rounded-lg mb-4"/>
+                <img src={`${API_BASE_URL}${issue.images[0]}`} alt="Issue" className="w-full h-64 object-cover rounded-lg mb-4"/>
             )}
             
             <div className="flex items-center space-x-6 text-gray-500 border-t pt-4 mt-4">

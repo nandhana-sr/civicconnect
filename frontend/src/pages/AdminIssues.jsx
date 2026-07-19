@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../utils/api';
+import api, { API_BASE_URL } from '../utils/api';
 import { Eye, Edit, Trash2, CheckCircle, XCircle } from 'lucide-react';
 
 const AdminIssues = () => {
@@ -64,7 +64,7 @@ const AdminIssues = () => {
                             <div className="flex items-center justify-between">
                                 <div className="flex flex-1">
                                     {issue.images && issue.images.length > 0 ? (
-                                        <img src={`http://localhost:8080${issue.images[0]}`} alt="" className="h-16 w-24 object-cover rounded mr-4" />
+                                        <img src={`${API_BASE_URL}${issue.images[0]}`} alt="" className="h-16 w-24 object-cover rounded mr-4" />
                                     ) : (
                                         <div className="h-16 w-24 bg-gray-200 rounded flex items-center justify-center mr-4 text-gray-400">No Image</div>
                                     )}
