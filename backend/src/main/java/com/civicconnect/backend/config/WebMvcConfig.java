@@ -1,22 +1,10 @@
 package com.civicconnect.backend.config;
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    @Value("${upload.dir}")
-    private String uploadDir;
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
-        String absolutePath = uploadPath.toFile().getAbsolutePath();
-        if (!absolutePath.endsWith("/") && !absolutePath.endsWith("\\")) {
-            absolutePath += "/";
-        }
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:" + absolutePath);
-    }
+    // Resource handling is now explicitly managed by FileController.java
+    // to bypass all OS-specific file:/// path resolution issues.
 }
