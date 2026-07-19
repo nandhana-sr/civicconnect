@@ -46,7 +46,7 @@ const AdminReports = () => {
                     {reports.length === 0 ? (
                         <li className="p-4 text-center text-gray-500">No reported posts.</li>
                     ) : reports.map((report) => (
-                        <li key={report.id} className="p-4 sm:px-6 hover:bg-gray-50 flex items-center justify-between">
+                        <li key={report.id} className="p-4 sm:px-6 hover:bg-gray-50 flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
                             <div className="flex-1">
                                 <p className="text-sm font-medium text-red-600 flex items-center">
                                     <AlertTriangle className="w-4 h-4 mr-1"/> Reason: {report.reason}

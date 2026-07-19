@@ -106,7 +106,7 @@ const IssueCard = ({ issue: initialIssue }) => {
                 <img src={`${API_BASE_URL}${issue.images[0]}`} alt="Issue" className="w-full h-64 object-cover rounded-lg mb-4"/>
             )}
             
-            <div className="flex items-center space-x-6 text-gray-500 border-t pt-4 mt-4">
+            <div className="flex flex-wrap items-center gap-4 text-gray-500 border-t pt-4 mt-4">
                 <button onClick={toggleSupport} className="flex items-center hover:text-red-500 transition-colors font-medium">
                     <Heart className="w-5 h-5 mr-1"/> {issue.supportsCount} Upvotes
                 </button>

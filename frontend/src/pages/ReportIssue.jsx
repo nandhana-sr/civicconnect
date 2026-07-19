@@ -98,7 +98,7 @@ const ReportIssue = () => {
                     <label className="block text-sm font-medium text-gray-700">Title</label>
                     <input name="title" onChange={handleChange} required className="mt-1 w-full rounded-md border-gray-300 p-2 border" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Category</label>
                         <select name="category" onChange={handleChange} className="mt-1 w-full rounded-md border-gray-300 p-2 border">
@@ -126,7 +126,7 @@ const ReportIssue = () => {
                     <label className="block text-sm font-medium text-gray-700">Detailed Description</label>
                     <textarea name="detailedDescription" onChange={handleChange} rows="4" className="mt-1 w-full rounded-md border-gray-300 p-2 border"></textarea>
                 </div>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">District</label>
                         <input name="district" value={formData.district} onChange={handleChange} required className="mt-1 w-full border p-2 rounded" />

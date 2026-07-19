@@ -61,7 +61,7 @@ const AdminIssues = () => {
                 <ul className="divide-y divide-gray-200">
                     {issues.map((issue) => (
                         <li key={issue.id} className="p-4 sm:px-6 hover:bg-gray-50">
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
                                 <div className="flex flex-1">
                                     {issue.images && issue.images.length > 0 ? (
                                         <img src={`${API_BASE_URL}${issue.images[0]}`} alt="" className="h-16 w-24 object-cover rounded mr-4" />

@@ -6,9 +6,9 @@ const AdminLayout = () => {
     const location = useLocation();
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
+        <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
             {/* Sidebar */}
-            <div className="w-64 bg-white shadow-md flex flex-col">
+            <div className="w-full md:w-64 bg-white shadow-md flex flex-col md:min-h-screen">
                 <div className="p-4 border-b">
                     <h2 className="text-xl font-bold text-gray-800">Admin Portal</h2>
                 </div>

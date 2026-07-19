@@ -49,7 +49,7 @@ const AdminUsers = () => {
             <div className="bg-white shadow overflow-hidden sm:rounded-md">
                 <ul className="divide-y divide-gray-200">
                     {users.map((user) => (
-                        <li key={user.id} className="p-4 sm:px-6 flex items-center justify-between">
+                        <li key={user.id} className="p-4 sm:px-6 flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
                             <div className="flex items-center">
                                 {user.profilePictureUrl ? (
                                     <img className="h-12 w-12 rounded-full mr-4 object-cover" src={user.profilePictureUrl} alt="" />
